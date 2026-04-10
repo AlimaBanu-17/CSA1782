@@ -1,0 +1,49 @@
+def solve_queens(n):
+    # board[row] = col means a queen is at (row, col)
+    board = [-1] * n
+    all_solutions = []
+    
+    def is_safe(row, col):
+        """Checks if a queen can be placed at (row, col) safely."""
+        for prev_row in range(row):
+            prev_col = board[prev_row]
+            # Check for column conflict or diagonal conflict
+            if prev_col == col or abs(row - prev_row) == abs(col - prev_col):
+                return False
+        return True
+
+    def backtrack(row):
+        """Standard recursive backtracking to explore row by row."""
+        if row == n:
+            # Base case: All queens placed successfully
+            all_solutions.append(list(board))
+            return
+        
+        for col in range(n):
+            if is_safe(row, col):
+                board[row] = col      # Place queen
+                backtrack(row + 1)   # Move to next row
+                board[row] = -1      # Backtrack: remove queen
+                
+    backtrack(0)
+    return all_solutions
+
+def display_board(solution, n):
+    """Helper to visualize the board in a readable 'Q' and '.' format."""
+    for row_val in solution:
+        line = ""
+        for col in range(n):
+            line += "Q " if row_val == col else ". "
+        print(line)
+    print("-" * (n * 2))
+
+# --- Program Execution ---
+N = 8
+results = solve_queens(N)
+
+print(f"Total distinct solutions found: {len(results)}\n")
+
+# Visualize the first 3 solutions
+for i, sol in enumerate(results[:3]):
+    print(f"--- Solution {i + 1} ---")
+    display_board(sol, N)
