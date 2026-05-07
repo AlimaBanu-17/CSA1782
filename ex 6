@@ -1,0 +1,26 @@
+def get_successors(state):
+position, grid = state
+successors = []
+for dx, dy in [(0,1),(0,-1),(1,0),(-1,0)]:
+x, y = position
+nx, ny = x + dx, y + dy
+if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]):
+new_grid = [row[:] for row in grid]
+if new_grid[nx][ny] == 1:
+new_grid[nx][ny] = 0
+successors.append(((nx, ny), new_grid))
+return successors
+def dfs(state, visited):
+key = (state[0], tuple(tuple(r) for r in state[1]))
+if all(cell == 0 for row in state[1] for cell in row): return True
+if key in visited: return False
+visited.add(key)
+for s in get_successors(state):
+if dfs(s, visited): return True
+return False
+grid = [[0,1,1],[0,0,1],[1,0,0]]
+initial = ((0, 0), grid)
+if dfs(initial, set()):
+print("The room can be cleaned.")
+else:
+print("Cannot clean the room.")
