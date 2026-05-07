@@ -1,0 +1,102 @@
+# Missionaries and Cannibals Problem using BFS
+
+from collections import deque
+
+# State representation:
+# (Missionaries_left, Cannibals_left, Boat_side)
+# Boat_side = 1 (left side), 0 (right side)
+
+initial_state = (3, 3, 1)
+goal_state = (0, 0, 0)
+
+# Possible boat moves
+moves = [
+    (1, 0),  # 1 missionary
+    (2, 0),  # 2 missionaries
+    (0, 1),  # 1 cannibal
+    (0, 2),  # 2 cannibals
+    (1, 1)   # 1 missionary and 1 cannibal
+]
+
+
+# Check whether state is valid
+def is_valid(state):
+    m_left, c_left, boat = state
+    m_right = 3 - m_left
+    c_right = 3 - c_left
+
+    # Values should be within limits
+    if m_left < 0 or c_left < 0 or m_left > 3 or c_left > 3:
+        return False
+
+    # Missionaries should not be outnumbered
+    if m_left > 0 and c_left > m_left:
+        return False
+
+    if m_right > 0 and c_right > m_right:
+        return False
+
+    return True
+
+
+# Generate next possible states
+def get_next_states(state):
+    next_states = []
+
+    m_left, c_left, boat = state
+
+    for m, c in moves:
+
+        if boat == 1:  # Boat on left side
+            new_state = (m_left - m, c_left - c, 0)
+        else:          # Boat on right side
+            new_state = (m_left + m, c_left + c, 1)
+
+        if is_valid(new_state):
+            next_states.append(new_state)
+
+    return next_states
+
+
+# BFS Algorithm
+def bfs():
+    queue = deque()
+    queue.append((initial_state, []))
+
+    visited = set()
+
+    while queue:
+        current_state, path = queue.popleft()
+
+        if current_state in visited:
+            continue
+
+        visited.add(current_state)
+
+        path = path + [current_state]
+
+        # Goal reached
+        if current_state == goal_state:
+            return path
+
+        # Explore next states
+        for next_state in get_next_states(current_state):
+            queue.append((next_state, path))
+
+    return None
+
+
+# Main Program
+solution = bfs()
+
+if solution:
+    print("Solution Found:\n")
+    for step in solution:
+        m_left, c_left, boat = step
+        side = "Left" if boat == 1 else "Right"
+
+        print(f"Missionaries Left: {m_left}, "
+              f"Cannibals Left: {c_left}, "
+              f"Boat: {side}")
+else:
+    print("No Solution Exists")
