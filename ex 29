@@ -1,0 +1,40 @@
+% -------------------------
+% FACTS (Initial Knowledge)
+% -------------------------
+
+fact(a).
+fact(b).
+
+% -------------------------
+% RULES (Inference Rules)
+% -------------------------
+
+% If A and B are true, then C is true
+rule(c) :-
+    fact(a),
+    fact(b).
+
+% If C is true, then D is true
+rule(d) :-
+    fact(c).
+
+% If D is true, then E is true
+rule(e) :-
+    fact(d).
+
+% -------------------------
+% FORWARD CHAINING ENGINE
+% -------------------------
+
+forward :-
+    (rule(c) -> assert(fact(c)) ; true),
+    (rule(d) -> assert(fact(d)) ; true),
+    (rule(e) -> assert(fact(e)) ; true),
+    write('Forward chaining completed.'), nl.
+
+% -------------------------
+% QUERY HELPERS
+% -------------------------
+
+known(X) :-
+    fact(X).
