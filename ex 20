@@ -1,0 +1,14 @@
+% planet(Name, DistanceFromSun, Type)
+
+planet(mercury, 58, terrestrial).
+planet(venus, 108, terrestrial).
+planet(earth, 150, terrestrial).
+planet(mars, 228, terrestrial).
+planet(jupiter, 778, gas_giant).
+planet(saturn, 1430, gas_giant).
+planet(uranus, 2870, ice_giant).
+planet(neptune, 4500, ice_giant).
+
+% Query Examples:
+% ?- planet(earth, Distance, Type).
+% ?- planet(Name, Distance, gas_giant).
