@@ -1,0 +1,34 @@
+# Decision Tree Classifier Example
+
+from sklearn.tree import DecisionTreeClassifier
+
+# Training data
+# Features: [Age, Salary]
+X = [
+    [25, 30000],
+    [35, 50000],
+    [45, 70000],
+    [20, 20000],
+    [40, 60000]
+]
+
+# Labels: 0 = No, 1 = Yes
+y = [0, 1, 1, 0, 1]
+
+# Create Decision Tree model
+model = DecisionTreeClassifier()
+
+# Train the model
+model.fit(X, y)
+
+# Test data
+test_data = [[30, 40000]]
+
+# Predict output
+prediction = model.predict(test_data)
+
+# Display result
+if prediction[0] == 1:
+    print("Prediction: Yes")
+else:
+    print("Prediction: No")
