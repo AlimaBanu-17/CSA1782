@@ -1,0 +1,16 @@
+% Fruit and Color Database
+
+fruit(apple, red).
+fruit(banana, yellow).
+fruit(grape, purple).
+fruit(orange, orange).
+fruit(kiwi, green).
+fruit(pear, green).
+
+% Rule: Find fruit by color
+fruit_color(Fruit, Color) :-
+    fruit(Fruit, Color).
+
+% Query examples:
+% ?- fruit(Fruit, green).
+% ?- fruit(apple, Color).
