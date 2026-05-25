@@ -1,0 +1,12 @@
+% Base case
+sum(0, 0).
+
+% Recursive case
+sum(N, Result) :-
+    N > 0,
+    N1 is N - 1,
+    sum(N1, Temp),
+    Result is Temp + N.
+
+% Query:
+% ?- sum(5, Result).
