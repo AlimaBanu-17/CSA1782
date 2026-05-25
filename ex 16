@@ -1,0 +1,41 @@
+# Feed Forward Neural Network using TensorFlow/Keras
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+import numpy as np
+
+# Input data
+X = np.array([
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+])
+
+# Output data (XOR problem)
+y = np.array([0, 1, 1, 0])
+
+# Create model
+model = Sequential()
+
+# Hidden layer
+model.add(Dense(4, input_dim=2, activation='relu'))
+
+# Output layer
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Train model
+model.fit(X, y, epochs=500, verbose=0)
+
+# Predict output
+predictions = model.predict(X)
+
+# Display predictions
+print("Predictions:")
+for i in range(len(X)):
+    print(X[i], "->", round(predictions[i][0]))
