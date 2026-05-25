@@ -1,0 +1,31 @@
+% -------------------------
+% FACTS (Patterns)
+% -------------------------
+
+shape(circle).
+shape(square).
+shape(triangle).
+shape(rectangle).
+
+% -------------------------
+% PATTERN MATCHING RULES
+% -------------------------
+
+% Match exact shape
+match(X) :-
+    shape(X),
+    write('Matched shape: '),
+    write(X), nl.
+
+% Match shape starting with 's' (square)
+match(square) :-
+    write('Pattern matched: Square shape detected'), nl.
+
+% Match shape starting with 'c' (circle)
+match(circle) :-
+    write('Pattern matched: Circle shape detected'), nl.
+
+% Default case
+match(X) :-
+    write('No specific pattern match for: '),
+    write(X), nl.
