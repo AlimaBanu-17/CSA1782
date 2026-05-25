@@ -1,0 +1,56 @@
+% Facts: parent relationships
+
+parent(john, mary).
+parent(john, david).
+parent(susan, mary).
+parent(susan, david).
+
+parent(mary, alice).
+parent(mary, bob).
+
+% Gender facts
+
+male(john).
+male(david).
+male(bob).
+
+female(susan).
+female(mary).
+female(alice).
+
+% Rules
+
+% Father rule
+father(X, Y) :-
+    parent(X, Y),
+    male(X).
+
+% Mother rule
+mother(X, Y) :-
+    parent(X, Y),
+    female(X).
+
+% Brother rule
+brother(X, Y) :-
+    parent(Z, X),
+    parent(Z, Y),
+    male(X),
+    X \= Y.
+
+% Sister rule
+sister(X, Y) :-
+    parent(Z, X),
+    parent(Z, Y),
+    female(X),
+    X \= Y.
+
+% Grandparent rule
+grandparent(X, Y) :-
+    parent(X, Z),
+    parent(Z, Y).
+
+% Query Examples:
+% ?- father(john, mary).
+% ?- mother(susan, david).
+% ?- brother(david, mary).
+% ?- grandparent(john, alice).
