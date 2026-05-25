@@ -1,0 +1,10 @@
+% student(StudentName, TeacherName, Subject, SubjectCode)
+
+student(rahul, sharma, mathematics, m101).
+student(alice, johnson, physics, p102).
+student(sneha, kumar, chemistry, c103).
+student(arun, sharma, mathematics, m101).
+
+% Query Examples:
+% ?- student(rahul, Teacher, Subject, Code).
+% ?- student(Student, sharma, Subject, Code).
