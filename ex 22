@@ -1,0 +1,22 @@
+% Facts about birds
+
+bird(parrot).
+bird(eagle).
+bird(penguin).
+bird(ostrich).
+
+% Birds that cannot fly
+
+cannot_fly(penguin).
+cannot_fly(ostrich).
+
+% Rule: A bird can fly if it is a bird and not in cannot_fly list
+
+can_fly(X) :-
+    bird(X),
+    \+ cannot_fly(X).
+
+% Query Examples:
+% ?- can_fly(parrot).
+% ?- can_fly(penguin).
+% ?- cannot_fly(ostrich).
