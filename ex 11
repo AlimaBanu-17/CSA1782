@@ -1,1 +1,50 @@
+# Map Coloring Problem using CSP (Constraint Satisfaction Problem)
 
+# List of colors
+colors = ["Red", "Green", "Blue"]
+
+# Map regions and their neighbors
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['B', 'C']
+}
+
+# Dictionary to store color assignments
+solution = {}
+
+# Function to check if color assignment is valid
+def is_safe(region, color):
+    for neighbor in graph[region]:
+        if neighbor in solution and solution[neighbor] == color:
+            return False
+    return True
+
+# Backtracking function
+def solve(region_list, index):
+    if index == len(region_list):
+        return True
+
+    region = region_list[index]
+
+    for color in colors:
+        if is_safe(region, color):
+            solution[region] = color
+
+            if solve(region_list, index + 1):
+                return True
+
+            del solution[region]
+
+    return False
+
+# Driver code
+regions = list(graph.keys())
+
+if solve(regions, 0):
+    print("Map Coloring Solution:")
+    for region in solution:
+        print(region, "->", solution[region])
+else:
+    print("No solution found")
