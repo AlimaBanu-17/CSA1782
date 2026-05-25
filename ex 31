@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Tech Blog - Home</title>
+</head>
+
+<body>
+
+    <h1>Welcome to My Tech Blog</h1>
+    <p>This blog demonstrates basic HTML tags in WordPress.</p>
+
+    <hr>
+
+    <!-- Navigation using Anchor Tags -->
+    <h2>Navigation</h2>
+    <a href="#post1">Go to Post 1</a> |
+    <a href="#post2">Go to Post 2</a> |
+    <a href="#contact">Contact</a>
+
+    <hr>
+
+    <!-- Blog Post 1 -->
+    <h2 id="post1">Post 1: Introduction to AI</h2>
+    <p>
+        Artificial Intelligence is the simulation of human intelligence in machines.
+        Learn more at 
+        <a href="https://www.ibm.com/artificial-intelligence" target="_blank">
+            IBM AI Page
+        </a>.
+    </p>
+
+    <a href="#top">Back to Top</a>
+
+    <hr>
+
+    <!-- Blog Post 2 -->
+    <h2 id="post2">Post 2: Web Development Basics</h2>
+    <p>
+        Web development includes HTML, CSS, and JavaScript.
+        Visit 
+        <a href="https://developer.mozilla.org" target="_blank">
+            MDN Web Docs
+        </a>
+        for more details.
+    </p>
+
+    <a href="#top">Back to Top</a>
+
+    <hr>
+
+    <!-- Contact Section -->
+    <h2 id="contact">Contact</h2>
+    <p>Email: 
+        <a href="mailto:example@gmail.com">example@gmail.com</a>
+    </p>
+
+</body>
+</html>
