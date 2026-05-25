@@ -1,0 +1,58 @@
+# A* Algorithm implementation
+
+from queue import PriorityQueue
+
+# Graph with costs
+graph = {
+    'A': {'B': 1, 'C': 3},
+    'B': {'D': 1, 'E': 5},
+    'C': {'F': 2},
+    'D': {'G': 4},
+    'E': {'G': 1},
+    'F': {'G': 2},
+    'G': {}
+}
+
+# Heuristic values
+heuristic = {
+    'A': 7,
+    'B': 6,
+    'C': 4,
+    'D': 3,
+    'E': 2,
+    'F': 1,
+    'G': 0
+}
+
+# A* function
+def a_star(start, goal):
+    open_set = PriorityQueue()
+    open_set.put((0, start))
+
+    g_cost = {start: 0}
+    parent = {start: None}
+
+    while not open_set.empty():
+        current = open_set.get()[1]
+
+        if current == goal:
+            path = []
+            while current:
+                path.append(current)
+                current = parent[current]
+            path.reverse()
+            return path
+
+        for neighbor, cost in graph[current].items():
+            new_cost = g_cost[current] + cost
+
+            if neighbor not in g_cost or new_cost < g_cost[neighbor]:
+                g_cost[neighbor] = new_cost
+                f_cost = new_cost + heuristic[neighbor]
+                open_set.put((f_cost, neighbor))
+                parent[neighbor] = current
+
+# Driver code
+path = a_star('A', 'G')
+
+print("Shortest Path:", path)
