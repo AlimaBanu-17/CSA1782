@@ -1,0 +1,55 @@
+% ---------------------------
+% GRAPH REPRESENTATION
+% ---------------------------
+
+edge(a, b).
+edge(a, c).
+edge(b, d).
+edge(b, e).
+edge(c, f).
+edge(e, g).
+edge(f, g).
+
+% ---------------------------
+% HEURISTIC VALUES (h-cost)
+% Lower value = closer to goal
+% ---------------------------
+
+heuristic(a, 6).
+heuristic(b, 4).
+heuristic(c, 5).
+heuristic(d, 7).
+heuristic(e, 2).
+heuristic(f, 3).
+heuristic(g, 0).   % Goal node
+
+% ---------------------------
+% BEST FIRST SEARCH
+% ---------------------------
+
+best_first(Start, Goal) :-
+    bfs([[Start]], Goal).
+
+% If goal found
+bfs([[Goal|Path]|_], Goal) :-
+    reverse([Goal|Path], Result),
+    write('Path Found: '),
+    write(Result), nl.
+
+% Expand nodes
+bfs([[Current|Path]|Rest], Goal) :-
+    findall([Next,Current|Path],
+            (edge(Current, Next), \+ member(Next, [Current|Path])),
+            Children),
+    append(Rest, Children, NewList),
+    sort_by_heuristic(NewList, Sorted),
+    bfs(Sorted, Goal).
+
+% Sort nodes based on heuristic value
+sort_by_heuristic(List, Sorted) :-
+    map_list_to_pairs(eval, List, Pairs),
+    keysort(Pairs, SortedPairs),
+    pairs_values(SortedPairs, Sorted).
+
+eval([Node|_], H) :-
+    heuristic(Node, H).
