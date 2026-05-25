@@ -1,0 +1,36 @@
+
+% -------------------------
+% FACTS (Known truths)
+% -------------------------
+
+fact(a).
+fact(b).
+
+% -------------------------
+% RULES
+% -------------------------
+
+% c is true if a and b are true
+rule(c) :-
+    fact(a),
+    fact(b).
+
+% d is true if c is true
+rule(d) :-
+    rule(c).
+
+% e is true if d is true
+rule(e) :-
+    rule(d).
+
+% -------------------------
+% BACKWARD CHAINING PREDICATE
+% -------------------------
+
+prove(X) :-
+    fact(X),
+    write(X), write(' is a fact.'), nl.
+
+prove(X) :-
+    rule(X),
+    write(X), write(' is proven using rules.'), nl.
