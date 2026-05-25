@@ -1,0 +1,40 @@
+% ----------------------------
+% FACTS: Symptoms of diseases
+% ----------------------------
+
+symptom(flu, fever).
+symptom(flu, cough).
+symptom(flu, body_pain).
+
+symptom(cold, sneezing).
+symptom(cold, runny_nose).
+symptom(cold, sore_throat).
+
+symptom(covid, fever).
+symptom(covid, cough).
+symptom(covid, loss_of_smell).
+symptom(covid, tiredness).
+
+symptom(malaria, fever).
+symptom(malaria, chills).
+symptom(malaria, sweating).
+
+% ----------------------------
+% RULE: Diagnosis
+% ----------------------------
+
+disease(Disease) :-
+    symptom(Disease, Symptom),
+    write('Enter symptom: '),
+    read(SymptomInput),
+    check(Disease, SymptomInput).
+
+% Check if symptom matches disease symptoms
+check(Disease, Symptom) :-
+    symptom(Disease, Symptom),
+    write('Possible disease: '),
+    write(Disease), nl.
+
+check(_, Symptom) :-
+    write('No matching disease found for symptom: '),
+    write(Symptom), nl.
