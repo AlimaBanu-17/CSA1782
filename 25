@@ -1,0 +1,19 @@
+% Monkey Banana Problem
+
+% Initial State:
+% monkey at door
+% box at window
+% banana at center
+
+% Rule: Monkey can get banana if it pushes the box,
+% climbs on it, and grabs the banana.
+
+can_get :-
+    write('Monkey moves from door to window'), nl,
+    write('Monkey pushes the box from window to center'), nl,
+    write('Monkey climbs onto the box'), nl,
+    write('Monkey grabs the banana'), nl,
+    write('Monkey gets the banana successfully').
+
+% Query:
+% ?- can_get.
