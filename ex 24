@@ -1,0 +1,17 @@
+% Disease and Diet Suggestions
+
+diet(diabetes, 'Low sugar diet').
+diet(bp, 'Low salt diet').
+diet(obesity, 'Low fat diet').
+diet(anemia, 'Iron rich diet').
+diet(heart_problem, 'Low cholesterol diet').
+
+% Rule to suggest diet
+suggest_diet(Disease) :-
+    diet(Disease, Diet),
+    write('Suggested Diet: '),
+    write(Diet).
+
+% Query Examples:
+% ?- suggest_diet(diabetes).
+% ?- suggest_diet(obesity).
