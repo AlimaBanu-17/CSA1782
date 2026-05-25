@@ -1,0 +1,10 @@
+% Database of Name and Date of Birth
+
+person(john, '12-05-2000').
+person(alice, '25-08-1999').
+person(rahul, '10-01-2001').
+person(sneha, '18-07-2002').
+
+% Query Examples:
+% ?- person(john, DOB).
+% ?- person(Name, '25-08-1999').
