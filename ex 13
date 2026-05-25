@@ -1,0 +1,35 @@
+# Minimax Algorithm Example
+
+# Function to implement Minimax
+def minimax(depth, node_index, is_max, scores, height):
+
+    # Base case: reach leaf node
+    if depth == height:
+        return scores[node_index]
+
+    # Maximizer's move
+    if is_max:
+        return max(
+            minimax(depth + 1, node_index * 2, False, scores, height),
+            minimax(depth + 1, node_index * 2 + 1, False, scores, height)
+        )
+
+    # Minimizer's move
+    else:
+        return min(
+            minimax(depth + 1, node_index * 2, True, scores, height),
+            minimax(depth + 1, node_index * 2 + 1, True, scores, height)
+        )
+
+# Driver code
+
+# Leaf node values
+scores = [3, 5, 2, 9, 12, 5, 23, 23]
+
+# Tree height
+tree_height = 3
+
+# Find optimal value
+result = minimax(0, 0, True, scores, tree_height)
+
+print("Optimal value using Minimax Algorithm is:", result)
