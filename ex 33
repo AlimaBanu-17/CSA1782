@@ -1,0 +1,34 @@
+% -------------------------
+% Check if a character is a vowel
+% -------------------------
+
+vowel(a).
+vowel(e).
+vowel(i).
+vowel(o).
+vowel(u).
+
+% -------------------------
+% Count vowels in a list
+% -------------------------
+
+count_vowels([], 0).
+
+count_vowels([H|T], Count) :-
+    vowel(H),
+    count_vowels(T, Temp),
+    Count is Temp + 1.
+
+count_vowels([H|T], Count) :-
+    \+ vowel(H),
+    count_vowels(T, Count).
+
+% -------------------------
+% Convert string to list and start counting
+% -------------------------
+
+start_count(String) :-
+    string_chars(String, CharList),
+    count_vowels(CharList, Count),
+    write('Number of vowels: '),
+    write(Count), nl.
